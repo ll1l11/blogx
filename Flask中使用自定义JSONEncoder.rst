@@ -10,45 +10,45 @@
 
 Flask本身是使用的一个自己实现的JSONEncoder, flask.json.JSONEncoder_.
 
-自定义的实现参考：`Custom Flask JSONEncoder`_.
+一个实现实现参考：`Custom Flask JSONEncoder`_.
 
-.. _Custom Flask JSONEncoder: http://flask.pocoo.org/snippets/119/
+实现代码如下::
+
+    from datetime import datetime, date, time
+    import json
+    import uuid
+    import decimal
+
+    from flask import Flask, jsonify
 
 
-
-结合Django的一个CustomJSONEncoder的实现::
-
-    class DjangoJSONEncoder(json.JSONEncoder):
-        """
-        JSONEncoder subclass that knows how to encode date/time, decimal types, and
-        UUIDs.
-        """
+    class CustomJSONEncoder(json.JSONEncoder):
         def default(self, o):
             # See "Date Time String Format" in the ECMA-262 specification.
-            if isinstance(o, datetime.datetime):
-                r = o.isoformat()
-                if o.microsecond:
-                    r = r[:23] + r[26:]
-                if r.endswith('+00:00'):
-                    r = r[:-6] + 'Z'
-                return r
-            elif isinstance(o, datetime.date):
+            if isinstance(o, datetime):
+                return o.isoformat(sep=' ', timespec='seconds')
+            if isinstance(o, date):
                 return o.isoformat()
-            elif isinstance(o, datetime.time):
-                if is_aware(o):
-                    raise ValueError("JSON can't represent timezone-aware times.")
-                r = o.isoformat()
-                if o.microsecond:
-                    r = r[:12]
-                return r
-            elif isinstance(o, datetime.timedelta):
-                return duration_iso_string(o)
-            elif isinstance(o, (decimal.Decimal, uuid.UUID, Promise)):
+            if isinstance(o, time):
+                return o.isoformat(timespec='seconds')
+            if isinstance(o, (decimal.Decimal, uuid.UUID)):
                 return str(o)
             else:
                 return super().default(o)
 
 
-结合两者，实现代码如下
+    app = Flask(__name__)
+    app.json_encoder = CustomJSONEncoder
+
+
+    @app.route('/')
+    def index():
+        return jsonify(now=datetime.now())
+
+
+    if __name__ == '__main__':
+        app.run()
+
 
 .. _flask.json.JSONEncoder: http://flask.pocoo.org/docs/0.12/api/#flask.json.JSONEncoder
+.. _Custom Flask JSONEncoder: http://flask.pocoo.org/snippets/119/
