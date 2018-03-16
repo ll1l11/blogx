@@ -8,7 +8,7 @@
         "now": "Fri, 16 Mar 2018 18:25:24 GMT"
     }
 
-Flask本身是使用的一个自己实现的JSONEncoder, flask.json.JSONEncode_.
+Flask本身是使用的一个自己实现的JSONEncoder, flask.json.JSONEncoder_.
 
 自定义的实现参考：`Custom Flask JSONEncoder`_.
 
