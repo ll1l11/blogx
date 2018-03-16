@@ -12,7 +12,6 @@ Flask本身是使用的一个自己实现的JSONEncoder, flask.json.JSONEncoder_
 
 自定义的实现参考：`Custom Flask JSONEncoder`_.
 
-
 .. _Custom Flask JSONEncoder: http://flask.pocoo.org/snippets/119/
 
 
@@ -54,4 +53,4 @@ Flask本身是使用的一个自己实现的JSONEncoder, flask.json.JSONEncoder_
 
 
 
-.. flask.json.JSONEncoder: http://flask.pocoo.org/docs/0.12/api/#flask.json.JSONEncoder
+.. _flask.json.JSONEncoder: http://flask.pocoo.org/docs/0.12/api/#flask.json.JSONEncoder
