@@ -12,4 +12,4 @@
 自定义的实现参考：`Custom Flask JSONEncoder`_.
 
 
-_`Custom Flask JSONEncoder`: http://flask.pocoo.org/snippets/119/
+.. _Custom Flask JSONEncoder: http://flask.pocoo.org/snippets/119/
