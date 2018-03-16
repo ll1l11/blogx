@@ -49,8 +49,6 @@ Flask本身是使用的一个自己实现的JSONEncoder, flask.json.JSONEncoder_
                 return super().default(o)
 
 
-结合两者，实现代码如下::
-
-
+结合两者，实现代码如下
 
 .. _flask.json.JSONEncoder: http://flask.pocoo.org/docs/0.12/api/#flask.json.JSONEncoder
