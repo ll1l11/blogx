@@ -1,0 +1,4 @@
+macOS下::
+
+    sed -i '' 's/abc/xyz/g' $(grep -r 'abc' . -l)
+    
